@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moda Urbana | Ropa con Estilo</title>
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        /* ---------- HEADER ---------- */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 0;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #1e1e1e;
+        }
+
+        .logo span {
+            color: #e63946;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            font-weight: 500;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #2b2b2b;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #e63946;
+        }
+
+        .icons {
+            display: flex;
+            gap: 22px;
+            font-size: 20px;
+            color: #2b2b2b;
+        }
+
+        .icons i {
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .icons i:hover {
+            color: #e63946;
+        }
+
+        /* ---------- SLIDER (BANNERS) ---------- */
+        .slider-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 30px auto 20px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.15);
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+            height: 380px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slide:nth-child(1) {
+            background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&h=600&fit=crop&auto=format');
+        }
+
+        .slide:nth-child(2) {
+            background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)), url('https://images.unsplash.com/photo-1533659828870-95ee305cee3e?w=1200&h=600&fit=crop&auto=format');
+        }
+
+        .slide:nth-child(3) {
+            background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.25)), url('https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=1200&h=600&fit=crop&auto=format');
+        }
+
+        .slide-content {
+            max-width: 700px;
+            padding: 20px;
+            z-index: 2;
+        }
+
+        .slide-content h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+            text-shadow: 2px 2px 12px rgba(0,0,0,0.4);
+        }
+
+        .slide-content p {
+            font-size: 1.3rem;
+            margin-bottom: 24px;
+            font-weight: 400;
+            text-shadow: 1px 1px 8px rgba(0,0,0,0.4);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #e63946;
+            color: white;
+            padding: 14px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: background 0.2s, transform 0.2s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(230, 57, 70, 0.3);
+        }
+
+        .btn:hover {
+            background-color: #c1121f;
+            transform: scale(1.02);
+        }
+
+        /* Flechas del slider */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+            color: #1e1e1e;
+            z-index: 10;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .slider-btn:hover {
+            background-color: white;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+        }
+
+        .prev {
+            left: 20px;
+        }
+
+        .next {
+            right: 20px;
+        }
+
+        /* Puntos indicadores */
+        .dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .dot.active {
+            background-color: #ffffff;
+            transform: scale(1.2);
+            border-color: #e63946;
+        }
+
+        /* ---------- TÍTULOS DE SECCIÓN ---------- */
+        .section-title {
+            text-align: center;
+            margin: 60px 0 30px;
+        }
+
+        .section-title h2 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #1e1e1e;
+            letter-spacing: -0.5px;
+        }
+
+        .section-title h2 span {
+            color: #e63946;
+        }
+
+        .section-title p {
+            color: #6c6c6c;
+            margin-top: 8px;
+            font-size: 1.1rem;
+        }
+
+        /* ---------- GRID DE PRODUCTOS ---------- */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0 70px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+            transition: transform 0.25s, box-shadow 0.25s;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-img {
+            height: 280px;
+            background-color: #f1f1f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover .product-img img {
+            transform: scale(1.03);
+        }
+
+        .product-info {
+            padding: 18px 16px 20px;
+        }
+
+        .product-info h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #1e1e1e;
+        }
+
+        .product-info .price {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: #e63946;
+            margin: 8px 0 6px;
+        }
+
+        .product-info .category {
+            font-size: 0.9rem;
+            color: #8a8a8a;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .rating {
+            color: #f4b400;
+            font-size: 0.95rem;
+            margin-bottom: 14px;
+        }
+
+        .rating span {
+            color: #7a7a7a;
+            margin-left: 6px;
+            font-size: 0.85rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 12px;
+            background-color: #1e1e1e;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .add-to-cart:hover {
+            background-color: #e63946;
+        }
+
+        /* ---------- FOOTER ---------- */
+        footer {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 50px 0 30px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 18px;
+            font-weight: 600;
+        }
+
+        .footer-col p, .footer-col a {
+            color: #b0b0b0;
+            text-decoration: none;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .footer-col a:hover {
+            color: white;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 16px;
+            margin-top: 12px;
+            font-size: 20px;
+        }
+
+        .social-icons a {
+            color: #b0b0b0;
+            transition: color 0.2s;
+        }
+
+        .social-icons a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            font-size: 0.9rem;
+            color: #8a8a8a;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 992px) {
+            .slide-content h1 {
+                font-size: 2.6rem;
+            }
+            .slide {
+                height: 340px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-bar {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 16px;
+            }
+            .nav-links {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                gap: 24px;
+                margin-top: 8px;
+            }
+            .logo {
+                font-size: 24px;
+            }
+            .slide-content h1 {
+                font-size: 2rem;
+            }
+            .slide-content p {
+                font-size: 1rem;
+            }
+            .btn {
+                padding: 12px 28px;
+                font-size: 1rem;
+            }
+            .slide {
+                height: 300px;
+            }
+            .slider-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            .products-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slide {
+                height: 260px;
+            }
+            .slide-content h1 {
+                font-size: 1.5rem;
+            }
+            .slide-content p {
+                font-size: 0.9rem;
+                margin-bottom: 16px;
+            }
+            .btn {
+                padding: 10px 22px;
+                font-size: 0.9rem;
+            }
+            .slider-btn {
+                width: 34px;
+                height: 34px;
+                font-size: 16px;
+            }
+            .prev { left: 10px; }
+            .next { right: 10px; }
+            .dots {
+                gap: 8px;
+                bottom: 12px;
+            }
+            .dot {
+                width: 10px;
+                height: 10px;
+            }
+            .section-title h2 {
+                font-size: 1.7rem;
+            }
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            .product-img {
+                height: 240px;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 30px;
+            }
+            .social-icons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <div class="nav-bar">
+                <div class="logo">MODA<span>URBANA</span></div>
+                <div class="nav-links">
+                    <a href="#">Inicio</a>
+                    <a href="#">Mujer</a>
+                    <a href="#">Hombre</a>
+                    <a href="#">Ofertas</a>
+                    <a href="#">Contacto</a>
+                </div>
+                <div class="icons">
+                    <i class="fas fa-search"></i>
+                    <i class="fas fa-heart"></i>
+                    <i class="fas fa-shopping-bag"></i>
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SLIDER DE BANNERS -->
+    <div class="container">
+        <div class="slider-container">
+            <div class="slider" id="slider">
+                <!-- Slide 1 -->
+                <div class="slide">
+                    <div class="slide-content">
+                        <h1>Nueva Colección Primavera</h1>
+                        <p>Descubre las tendencias que marcarán esta temporada</p>
+                        <a href="#" class="btn">Ver colección</a>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="slide">
+                    <div class="slide-content">
+                        <h1>Estilo Urbano &amp; Comodidad</h1>
+                        <p>Prendas diseñadas para destacar en la ciudad</p>
+                        <a href="#" class="btn">Comprar ahora</a>
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="slide">
+                    <div class="slide-content">
+                        <h1>Hasta 40% de descuento</h1>
+                        <p>Aprovecha nuestras ofertas exclusivas por tiempo limitado</p>
+                        <a href="#" class="btn">Ver ofertas</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flechas -->
+            <button class="slider-btn prev" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+            <button class="slider-btn next" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+
+            <!-- Puntos -->
+            <div class="dots" id="dots">
+                <div class="dot active" data-index="0"></div>
+                <div class="dot" data-index="1"></div>
+                <div class="dot" data-index="2"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRODUCTOS DESTACADOS -->
+    <div class="container">
+        <div class="section-title">
+            <h2>Los más <span>vendidos</span></h2>
+            <p>Prendas que todos quieren tener</p>
+        </div>
+
+        <div class="products-grid">
+            <!-- Producto 1 -->
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&h=400&fit=crop&auto=format" alt="Chaqueta de mezclilla">
+                </div>
+                <div class="product-info">
+                    <div class="category">Abrigos</div>
+                    <h3>Chaqueta Denim Clásica</h3>
+                    <div class="rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        <span>(48)</span>
+                    </div>
+                    <div class="price">$89.90</div>
+                    <button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Añadir</button>
+                </div>
+            </div>
+            <!-- Producto 2 -->
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=400&fit=crop&auto=format" alt="Blazer elegante">
+                </div>
+                <div class="product-info">
+                    <div class="category">Blazers</div>
+                    <h3>Blazer Oversize Beige</h3>
+                    <div class="rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <span>(32)</span>
+                    </div>
+                    <div class="price">$119.90</div>
+                    <button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Añadir</button>
+                </div>
+            </div>
+            <!-- Producto 3 -->
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop&auto=format" alt="Camiseta básica">
+                </div>
+                <div class="product-info">
+                    <div class="category">Camisetas</div>
+                    <h3>Camiseta Algodón Premium</h3>
+                    <div class="rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                        <span>(21)</span>
+                    </div>
+                    <div class="price">$29.90</div>
+                    <button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Añadir</button>
+                </div>
+            </div>
+            <!-- Producto 4 -->
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=400&h=400&fit=crop&auto=format" alt="Pantalón jogger">
+                </div>
+                <div class="product-info">
+                    <div class="category">Pantalones</div>
+                    <h3>Jogger Urbano Negro</h3>
+                    <div class="rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        <span>(57)</span>
+                    </div>
+                    <div class="price">$59.90</div>
+                    <button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Añadir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>ModaUrbana</h4>
+                    <p>Estilo y calidad para cada ocasión. Descubre las últimas tendencias en moda urbana.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Tienda</h4>
+                    <a href="#">Mujer</a><br>
+                    <a href="#">Hombre</a><br>
+                    <a href="#">Accesorios</a><br>
+                    <a href="#">Ofertas</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Ayuda</h4>
+                    <a href="#">Envíos</a><br>
+                    <a href="#">Devoluciones</a><br>
+                    <a href="#">Guía de tallas</a><br>
+                    <a href="#">Contacto</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Av. Principal 123, Ciudad</p>
+                    <p><i class="fas fa-phone"></i> +34 600 123 456</p>
+                    <p><i class="fas fa-envelope"></i> hola@modaurbana.com</p>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 ModaUrbana. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT SLIDER -->
+    <script>
+        (function() {
+            const slider = document.getElementById('slider');
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const dots = document.querySelectorAll('.dot');
+            let currentIndex = 0;
+            const totalSlides = slides.length;
+            let autoSlideInterval;
+
+            // Función para actualizar la posición del slider
+            function updateSlider() {
+                slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+                // Actualizar clases de los dots
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+            }
+
+            // Ir al siguiente slide
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % totalSlides;
+                updateSlider();
+            }
+
+            // Ir al slide anterior
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                updateSlider();
+            }
+
+            // Iniciar auto-slide
+            function startAutoSlide() {
+                autoSlideInterval = setInterval(nextSlide, 5000);
+            }
+
+            // Detener auto-slide
+            function stopAutoSlide() {
+                clearInterval(autoSlideInterval);
+            }
+
+            // Reiniciar auto-slide (útil después de interacción manual)
+            function resetAutoSlide() {
+                stopAutoSlide();
+                startAutoSlide();
+            }
+
+            // Event listeners para flechas
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                resetAutoSlide();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                resetAutoSlide();
+            });
+
+            // Event listeners para dots
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlider();
+                    resetAutoSlide();
+                });
+            });
+
+            // Pausar auto-slide al pasar el mouse sobre el slider
+            const sliderContainer = document.querySelector('.slider-container');
+            sliderContainer.addEventListener('mouseenter', stopAutoSlide);
+            sliderContainer.addEventListener('mouseleave', startAutoSlide);
+
+            // Iniciar auto-slide al cargar
+            startAutoSlide();
+
+            // Pequeño ajuste para touch en móviles (opcional, pero mantenemos simple)
+        })();
+    </script>
+</body>
+</html>
